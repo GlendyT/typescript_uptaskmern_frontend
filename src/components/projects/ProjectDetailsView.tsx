@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import AddTaskModal from "../tasks/AddTaskModal";
 import TaskList from "../tasks/TaskList";
+import EditTaskData from "../tasks/EditTaskData";
 
 export default function ProjectDetailsView() {
 
@@ -11,7 +12,7 @@ export default function ProjectDetailsView() {
   const params = useParams();
   const projectId = params.projectId!;
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["editProject", projectId],
+    queryKey: ["project", projectId],
     queryFn: () => getProjectById(projectId),
     retry: false,
   });
@@ -29,6 +30,7 @@ export default function ProjectDetailsView() {
      </nav>
      <TaskList tasks={data.tasks}/>
      <AddTaskModal/>
+     <EditTaskData/>
     </>
   );
 }
