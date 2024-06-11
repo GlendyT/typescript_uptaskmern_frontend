@@ -4,6 +4,11 @@ import DashboardView from "@/views/DashboardView";
 import CreateProjectView from "./views/projects/CreateProjectView";
 import EditProjectView from "./views/projects/EditProjectView";
 import ProjectDetailsView from "./components/projects/ProjectDetailsView";
+import AuthLayout from "./layouts/AuthLayout";
+import LoginView from "./views/auth/LoginView";
+import RegisterView from "./views/auth/RegisterView";
+import ConfirmAccuntView from "./views/auth/ConfirmAccuntView";
+import RequestNewCodeView from "./views/auth/RequestNewCodeView";
 
 // TODO: PARA PODER AGREGAR LOS @ DELANTE DE LOS COMPONENTES ES UNA DEPENDENCIA QUE SE LLAMA @types/node
 
@@ -16,6 +21,13 @@ export default function Router() {
                 <Route path="/projects/create" element={<CreateProjectView />}  />
                 <Route path="/projects/:projectId" element={<ProjectDetailsView />}  />
                 <Route path="/projects/:projectId/edit" element={<EditProjectView />}  />
+            </Route>
+
+            <Route element={<AuthLayout/>}>
+            <Route path="/auth/login" element={<LoginView />}  />
+            <Route path="/auth/register" element={<RegisterView />}  />
+            <Route path="/auth/confirm-account" element={<ConfirmAccuntView />}  />
+            <Route path="/auth/request-code" element={<RequestNewCodeView />}  />
             </Route>
         </Routes>
         </BrowserRouter>
