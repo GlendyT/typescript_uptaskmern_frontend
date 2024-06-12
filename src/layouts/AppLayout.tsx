@@ -22,7 +22,7 @@ export default function AppLayout() {
         <Outlet />
       </section>
 
-      <footer className="PY-5">
+      <footer className="py-5">
         <p className="text-center">
           Todos los derechos reservados {new Date().getFullYear()}
         </p>
