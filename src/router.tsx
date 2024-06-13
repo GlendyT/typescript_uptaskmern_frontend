@@ -9,6 +9,8 @@ import LoginView from "./views/auth/LoginView";
 import RegisterView from "./views/auth/RegisterView";
 import ConfirmAccuntView from "./views/auth/ConfirmAccuntView";
 import RequestNewCodeView from "./views/auth/RequestNewCodeView";
+import ForgotPasswordView from "./views/auth/ForgotPasswordView";
+import NewPasswordView from "./views/auth/NewPasswordView";
 
 // TODO: PARA PODER AGREGAR LOS @ DELANTE DE LOS COMPONENTES ES UNA DEPENDENCIA QUE SE LLAMA @types/node
 
@@ -28,6 +30,8 @@ export default function Router() {
             <Route path="/auth/register" element={<RegisterView />}  />
             <Route path="/auth/confirm-account" element={<ConfirmAccuntView />}  />
             <Route path="/auth/request-code" element={<RequestNewCodeView />}  />
+            <Route path="/auth/forgot-password" element={<ForgotPasswordView />}  />
+            <Route path="/auth/new-password" element={<NewPasswordView />}  />
             </Route>
         </Routes>
         </BrowserRouter>
