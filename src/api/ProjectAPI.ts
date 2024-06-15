@@ -15,6 +15,7 @@ export async function createProject(formData: ProjectFormData) {
 }
 
 export async function getProjects() {
+
     try {
         const { data } = await api("/projects")
         const response = dashboardProjectSchema.safeParse(data)
@@ -29,6 +30,7 @@ export async function getProjects() {
 }
 
 export async function getProjectById(id: Project["_id"]) {
+
     try {
         const { data } = await api(`/projects/${id}`)
         return data
