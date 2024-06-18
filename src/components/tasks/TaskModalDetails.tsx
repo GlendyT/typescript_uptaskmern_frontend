@@ -30,25 +30,25 @@ export default function TaskModalDetails() {
     retry: false,
   });
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: updateStatus,
     onError: (error) => {
-        toast.error(error.message)
+      toast.error(error.message);
     },
     onSuccess: (data) => {
-        toast.success(data)
-        queryClient.invalidateQueries({queryKey: ['project', projectId] })
-        queryClient.invalidateQueries({queryKey: ["task", taskId] })
-    }
-  })
+      toast.success(data);
+      queryClient.invalidateQueries({ queryKey: ["project", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["task", taskId] });
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const status = e.target.value as TaskStatus
+    const status = e.target.value as TaskStatus;
 
-    const data = {projectId, taskId, status}
-    mutate(data)
-  }
+    const data = { projectId, taskId, status };
+    mutate(data);
+  };
 
   if (isError) {
     toast.error(error.message, { toastId: "error" });
@@ -101,10 +101,26 @@ export default function TaskModalDetails() {
                       {data.name}
                     </Dialog.Title>
                     <p className="text-lg text-slate-500 mb-2">
+                      Description:
                       {data.description}:
                     </p>
+
+                    <p className="text-2xl text-slate-500 mb-2">
+                      Historial de Cambios
+                    </p>
+                    <ul className="list-decimal">
+                    {data.completedBy.map((activityLog) => (
+                      <li key={activityLog._id}>
+                        <span className="font-bold text-slate-600">
+                          {statusTranslations[activityLog.status]}
+                        </span>Por:{activityLog.user.name}
+                      </li>
+                    ))}
+                    </ul> 
                     <div className="my-5 space-y-3">
                       <label className="font-bold">
+                        {" "}
+                        Estado Actual:
                         <select
                           className="w-full p-3 bg-white border border-gray-300"
                           defaultValue={data.status}
