@@ -51,8 +51,9 @@ export async function updateTask({projectId, taskId, formData}: Pick<TaskAPI,  "
 export async function deleteTask({projectId, taskId} : Pick<TaskAPI, "projectId" | "taskId">) {
     try {
         const url = `/projects/${projectId}/tasks/${taskId}`
-        const {data} = await api.delete(url)
+        const {data} = await api.delete<string>(url)
         const response = taskSchema.safeParse(data)
+
         if(response.success) {
             return response.data
         }
