@@ -17,40 +17,43 @@ export default function AddTaskModal() {
   const modalTask = queryParams.get("newTask");
   const show = modalTask ? true : false;
 
-  
   //TODO: OBTENER PROJECTID
-  const params = useParams()
-  const projectId = params.projectId!
+  const params = useParams();
+  const projectId = params.projectId!;
 
-  const initialValues : TaskFormData = {
+  const initialValues: TaskFormData = {
     name: "",
     description: "",
-  }
+  };
 
-  const { register, handleSubmit, reset, formState:{errors} } = useForm({ defaultValues: initialValues})
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ defaultValues: initialValues });
 
-
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: createTask ,
+    mutationFn: createTask,
     onError: (error) => {
-        toast.error(error.message)
+      toast.error(error.message);
     },
     onSuccess: (data) => {
-        queryClient.invalidateQueries({queryKey: ["editProject", projectId] })
-        toast.success(data)
-        reset()
-        navigate(location.pathname, { replace: true })
-    }
-  })
+      toast.success(data);
+      queryClient.invalidateQueries({ queryKey: ["project", projectId] });
+      reset();
+      navigate(location.pathname, { replace: true });
+    },
+  });
 
-  const handleCreateTask = ( formData: TaskFormData) => {
+  const handleCreateTask = (formData: TaskFormData) => {
     const data = {
-        formData,
-        projectId
-    }
-    mutate(data)
-  }
+      formData,
+      projectId,
+    };
+    mutate(data);
+  };
 
   return (
     <>
@@ -94,15 +97,11 @@ export default function AddTaskModal() {
                   </p>
 
                   <form
-                   className="mt-10 space-y-3"
-                   onSubmit={handleSubmit(handleCreateTask)}
-                   noValidate
-
+                    className="mt-10 space-y-3"
+                    onSubmit={handleSubmit(handleCreateTask)}
+                    noValidate
                   >
-                    <TaskForm
-                     register={register}
-                     errors={errors}
-                    />
+                    <TaskForm register={register} errors={errors} />
                     <input
                       type="submit"
                       value="Guardar Tarea"
