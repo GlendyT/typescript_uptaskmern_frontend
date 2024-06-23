@@ -15,6 +15,7 @@ import ProjectTeamView from "./views/projects/ProjectTeamView";
 import ProfileView from "./views/profile/ProfileView";
 import ChangePasswordView from "./views/profile/ChangePasswordView";
 import ProfileLayout from "./layouts/ProfileLayout";
+import NotFound from "./views/404/NotFound";
 
 // TODO: PARA PODER AGREGAR LOS @ DELANTE DE LOS COMPONENTES ES UNA DEPENDENCIA QUE SE LLAMA @types/node
 
@@ -51,6 +52,9 @@ export default function Router() {
             element={<ForgotPasswordView />}
           />
           <Route path="/auth/new-password" element={<NewPasswordView />} />
+        </Route>
+        <Route element={<AuthLayout/>}>
+        <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
